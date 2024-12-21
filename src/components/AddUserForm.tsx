@@ -7,14 +7,14 @@ import {
   FormLabel,
   Input,
   Stack,
-  Heading,
+  // Heading, //TODO: Changed by Amir
   HStack,
   useToast,
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import {useCreateUser} from "../hooks/useCreateUser"; 
-import {useCreateUserACL} from "../hooks/useCreateUser"; 
+import { useCreateUser } from "../hooks/useCreateUser";
+// import {useCreateUserACL} from "../hooks/useCreateUser"; //TODO: Changed by Amir
 
 const AddUserForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -24,33 +24,44 @@ const AddUserForm = () => {
   const [password, setPassword] = useState("");
   const [maritalStatus, setMaritalStatus] = useState<"S" | "M">("S");
 
-  const { createUser, isLoading  } = useCreateUser(); // Use hook
-  const { createUserAcl,isPending } = useCreateUserACL(); // Use hook
+  const { createUser, isLoading } = useCreateUser(); // Use hook
+  // const { createUserAcl,isPending } = useCreateUserACL(); // Use hook //TODO: Changed by Amir
   const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    //TODO: Changed by Amir
+    // const userData = {
+    //   first_name: firstName,
+    //   last_name: lastName,
+    //   phoneNumber,
+    //   national_id: nationalId,
+    //   password,
+    //   marital_status: maritalStatus,
+    // };
+
     const userData = {
-      first_name: firstName, 
-      last_name: lastName,
-      phoneNumber, 
-      national_id: nationalId, 
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber,
+      nationalId: nationalId,
       password,
-      marital_status: maritalStatus, 
+      maritalStatus: maritalStatus,
     };
 
     console.log("Sending user data:", userData);
 
     try {
-      await createUser(userData ); 
+      await createUser(userData);
       toast({
         title: "کاربر با موفقیت اضافه شد",
         status: "success",
         duration: 5000,
         isClosable: true,
-      })
-      ;
+      });
+
+      console.log(userData);
       // Reset form
       setFirstName("");
       setLastName("");
@@ -65,7 +76,7 @@ const AddUserForm = () => {
         duration: 5000,
         isClosable: true,
       });
-      
+      console.log(error);
     }
   };
 

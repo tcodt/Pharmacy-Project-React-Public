@@ -23,6 +23,13 @@ const Permissions = () => {
   const { userId } = useParams<{ userId: string }>();
   const numericUserId = Number(userId); // Ensure userId is a number
 
+  //TODO: Changed by Amir
+  if (isNaN(numericUserId)) {
+    throw new Error(
+      "Invalid userId. Please ensure the URL contains a valid numeric userId."
+    );
+  }
+
   const [selectedPermissions, setSelectedPermissions] = useState<number[]>([]);
   const apiClient = new APIClient("/acl/user-permissions");
 
@@ -38,17 +45,21 @@ const Permissions = () => {
     if (selectedPermissions.length === permissionsList.length) {
       setSelectedPermissions([]);
     } else {
-      setSelectedPermissions(permissionsList.map((permission) => permission.id));
+      setSelectedPermissions(
+        permissionsList.map((permission) => permission.id)
+      );
     }
   };
 
   const { mutate: updatePermissions } = useMutation({
-    mutationFn: (permissions: number[]) => apiClient.put(`${numericUserId}`, { permissions }),
+    // mutationFn: (permissions: number[]) => apiClient.put(`${numericUserId}`, { permissions }), //TODO: Changed by Amir
+    mutationFn: (permissions: number[]) =>
+      apiClient.put(numericUserId, { permissions }), //TODO: Changed by Amir
   });
 
   const handleSavePermissions = () => {
     updatePermissions(selectedPermissions);
-    console.log(numericUserId)
+    console.log(numericUserId);
   };
 
   const cardBg = useColorModeValue("white", "gray.700");

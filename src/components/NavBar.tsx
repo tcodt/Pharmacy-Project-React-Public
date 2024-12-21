@@ -13,7 +13,7 @@ import { CiMenuBurger, CiSearch } from "react-icons/ci";
 import { FaTimes } from "react-icons/fa";
 import ColorModeSwitch from "./ColorModeSwitch";
 import MenuBar from "./MenuBar";
-import NotificationBell from "./NotificationBell";
+// import NotificationBell from "./NotificationBell"; //TODO: Changed by Amir
 import { IoMdChatbubbles } from "react-icons/io";
 import TicketForm from "./TicketForm";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,8 @@ import UserProfileImage from "./UserProfileImage";
 const NavBar = () => {
   const [showMenuIcon, setShowMenuIcon] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isTicketOpen, setIsTicketOpen] = useState(false);
+  // const [isTicketOpen, setIsTicketOpen] = useState(false); //TODO: Changed by Amir
+  const [isTicketOpen] = useState(false); //TODO: Changed by Amir
 
   const navigate = useNavigate();
   const handelTicket = () => {
@@ -40,7 +41,6 @@ const NavBar = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
 
   return (
     <>

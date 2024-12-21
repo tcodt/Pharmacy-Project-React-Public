@@ -1,7 +1,7 @@
 // src/components/UserProfileImage.tsx
 
-import React from 'react';
-import {jwtDecode} from "jwt-decode"; // ایمپورت jwt-decode
+import React from "react";
+// import { jwtDecode } from "jwt-decode"; // ایمپورت jwt-decode //TODO: Changed by Amir
 import {
   Menu,
   MenuButton,
@@ -12,14 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import profile from "../assets/user-profile.jpg"; // مسیر تصویر پیش‌فرض
-import useUsers from "../hooks/useUsers"; // استفاده از هوک useUsers
-import {Users} from "../entities/Users"; // اینترفیس User
-import useCurrentUser from '../hooks/useCurrentUser';
-
-
+// import useUsers from "../hooks/useUsers"; // استفاده از هوک useUsers //TODO: Changed by Amir
+// import { Users } from "../entities/Users"; // اینترفیس User //TODO: Changed by Amir
+import useCurrentUser from "../hooks/useCurrentUser";
 
 const UserProfileImage: React.FC = () => {
-  const{currentUser : user, isPending, error}=useCurrentUser();
+  const { currentUser: user, isPending, error } = useCurrentUser();
   const navigate = useNavigate();
 
   const handleAccount = () => {
@@ -30,22 +28,22 @@ const UserProfileImage: React.FC = () => {
   const handleLogout = () => {
     // Clear local storage token
     localStorage.removeItem("token");
-  
+
     // Clear all cookies
     const cookies = document.cookie.split(";");
-  
-    for (let cookie of cookies) {
+
+    for (const cookie of cookies) {
       const cookieName = cookie.split("=")[0].trim();
       document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
     }
-  
+
     // Navigate to login page
     navigate("/login");
   };
 
   // مدیریت وضعیت بارگذاری و خطا
   if (isPending) {
-    return <Spinner/>;
+    return <Spinner />;
   }
 
   let src = profile; // مسیر تصویر پیش‌فرض
@@ -57,11 +55,7 @@ const UserProfileImage: React.FC = () => {
   return (
     <Menu>
       <MenuButton>
-        <Avatar
-          src={src}
-          size="md"
-          cursor="pointer"
-        />
+        <Avatar src={src} size="md" cursor="pointer" />
       </MenuButton>
       <MenuList>
         <MenuItem onClick={handleAccount}>حساب کاربری</MenuItem>

@@ -2,7 +2,7 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
 
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/",
+  baseURL: "https://pharmacyapi.pythonanywhere.com/api/",
 });
 
 axiosInstance.interceptors.request.use(function (config) {
